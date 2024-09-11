@@ -94,15 +94,15 @@ The application configuration is defined in the `app/core/config.py` file. You c
 ### Example Configuration
 ```python
 class Settings:
-SERVER: str = 'test-db.c1aekiaskevm.ap-southeast-1.rds.amazonaws.com'
-USERNAME: str = 'testadmin'
-PASSWORD: str = 'testpw'
-DATABASE_NAME: str = 'testdb'
-DATABASE_URL: str = f"mssql+pymssql://{USERNAME}:{PASSWORD}@{SERVER}/{DATABASE_NAME}"
-SECRET_KEY: str = "your_secret_key"
-TEMP_DIR: str = "/app/temp"
-CELERY_BROKER_URL: str = "redis://redis:6379/0"
-CELERY_RESULT_BACKEND: str = "redis://redis:6379/0"
+    SERVER: str = 'test-db.c1aekiaskevm.ap-southeast-1.rds.amazonaws.com'
+    USERNAME: str = 'testadmin'
+    PASSWORD: str = 'testpw'
+    DATABASE_NAME: str = 'testdb'
+    DATABASE_URL: str = f"mssql+pymssql://{USERNAME}:{PASSWORD}@{SERVER}/{DATABASE_NAME}"
+    SECRET_KEY: str = "your_secret_key"
+    TEMP_DIR: str = "/app/temp"
+    CELERY_BROKER_URL: str = "redis://redis:6379/0"
+    CELERY_RESULT_BACKEND: str = "redis://redis:6379/0"
 settings = Settings()
 ```
 
