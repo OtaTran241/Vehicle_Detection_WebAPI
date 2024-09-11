@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Detection API</title>
+    <link rel="stylesheet" href="/static/index.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    <button id="toggle-sidebar" class="toggle-sidebar-left">☰</button>
+    <div class="container">
+        <div class="sidebar hidden" id="sidebar">
+            <h2>Menu</h2>
+            <ul>
+                <li><button id="view-history" class="sidebar-button">View History</button></li>
+                <li><button id="auth-action" class="sidebar-button">Login</button></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h1>Vehicle Detection</h1>
+            <form id="upload-form" enctype="multipart/form-data" action="/detect" method="post">
+                <label for="image">Upload an Image:</label>
+                <input type="file" id="image" name="file" accept="image/*">
+                <button type="submit" id="detect-button">Detect</button>
+            </form>
+
+            <div id="result"></div>
+
+            <div id="images" class="image-container" style="display: none;">
+                <div class="image-box">
+                    <h2>Original Image</h2>
+                    <img id="original-image" src="" alt="Original Image">
+                </div>
+                <div class="image-box">
+                    <h2>Processed Image with Bounding Boxes</h2>
+                    <img id="processed-image" src="" alt="Processed Image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggle-sidebar').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+            const container = document.querySelector('.container');
+            container.classList.toggle('sidebar-hidden');
+            const toggleButton = document.getElementById('toggle-sidebar');
+            toggleButton.classList.toggle('sidebar-hidden');
+        });
+
+        document.getElementById('view-history').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = '/history';
+        });
+
+        document.getElementById('auth-action').addEventListener('click', function(e) {
+            e.preventDefault();
+            const accessToken = localStorage.getItem('access_token');
+            if (accessToken) {
+                localStorage.removeItem('access_token');
+                alert('Logout successful');
+                document.getElementById('auth-action').textContent = 'Login';
+            } else {
+                window.location.href = '/login';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const accessToken = localStorage.getItem('access_token');
+            if (accessToken) {
+                document.getElementById('auth-action').textContent = 'Logout';
+            }
+        });
+
+        document.getElementById('detect-button').addEventListener('click', function(e) {
+            const accessToken = localStorage.getItem('access_token');
+            if (!accessToken) {
+                e.preventDefault();
+                alert('Please login first');
+                window.location.href = '/login';
+            }
+        });
+
+        document.getElementById('upload-form').onsubmit = async function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const token = localStorage.getItem('access_token'); 
+            const response = await fetch('/detect', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const result = await response.json();
+            if (response.ok) {
+                document.getElementById('original-image').src = result.original_image_url;
+                document.getElementById('processed-image').src = result.output_image_url;
+                document.getElementById('images').style.display = 'flex';
+            } else {
+                alert('Error: ' + result.error);
+            }
+        };
+    </script>
+</body>
+</html>

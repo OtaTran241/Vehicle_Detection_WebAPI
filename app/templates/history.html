@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <link rel="stylesheet" href="/static/history.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <h1>History</h1>
+            <div id="history-list"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            const accessToken = localStorage.getItem('access_token');
+            if (!accessToken) {
+                alert('Please login first');
+                window.location.href = '/login';
+                return;
+            }
+
+            try {
+                const response = await fetch('/predictions', {
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken 
+                    }
+                });
+                const data = await response.json();
+                const historyList = document.getElementById('history-list');
+                data.forEach(item => {
+                    const div = document.createElement('div');
+                    div.textContent = `Task ID: ${item.task_id}, Status: ${item.status}`;
+                    historyList.appendChild(div);
+                });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
