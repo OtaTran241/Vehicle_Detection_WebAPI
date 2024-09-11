@@ -14,7 +14,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 
 ## Overview
 
-<img src="./Images/Index.png" style="width:1500px;"/>
+<img src="./Images/Index.png" style="width:1800px;"/>
 
 ## Technologies Used
 ```FastAPI```: FastAPI is the main framework used to build the application's API. It provides endpoints for user registration, login, image upload, and vehicle detection result retrieval.  
