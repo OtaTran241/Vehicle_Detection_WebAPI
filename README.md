@@ -8,7 +8,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 ✅ [building model](#building-model)  
 ✅ [Technologies Used](#Technologies-Used)  
 ✅ [Installation](#Installation)  
-✅ [Configuration](#Configuration)  
+✅ [Database](#Database)  
 ✅ [Usage](#Usage)  
 ✅ [API Endpoints](#API-Endpoints)  
 ✅ [Contributing](#Contributing)  
@@ -95,7 +95,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 
 ## Configuration
 
-The application configuration is defined in the `app/core/config.py` file. You can modify the configuration values directly in this file.
+- The web API uses an SQL-Server RDS database from the AWS cloud platform. You can create the database and update the necessary information in the `app/core/config.py` file for data storage.
 
 ### Example Configuration
 ```python
