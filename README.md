@@ -2,14 +2,14 @@
 
 This project is a FastAPI-based web application for vehicle detection in images. It uses a pre-trained Faster R-CNN model to detect various types of vehicles and provides a web interface for uploading images and viewing detection results.
 
-## Features
+## Table of Contents
 
-- User registration and authentication
-- Image upload and vehicle detection
-- Viewing detection history
-- Celery for asynchronous task processing
-- Redis for task queue management
-- SQLAlchemy for database interactions
+✅ [Requirements](#Requirements)  
+✅ [Installation](#Installation)  
+✅ [Configuration](#Configuration)  
+✅ [Usage](#Usage)  
+✅ [API Endpoints](#API-Endpoints)  
+✅ [Contributing](#Contributing)  
 
 ## Requirements
 
@@ -151,4 +151,5 @@ settings = Settings()
   ]
   ```
 
-## Directory Structure
+## Contributing
+Contributions are welcome! If you have any ideas for improving the model or adding new features, feel free to submit a pull request or send an email to [tranducthuan220401@gmail.com](mailto:tranducthuan220401@gmail.com).
