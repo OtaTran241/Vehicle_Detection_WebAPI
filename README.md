@@ -51,3 +51,104 @@ CELERY_BROKER_URL: str = "redis://redis:6379/0"
 CELERY_RESULT_BACKEND: str = "redis://redis:6379/0"
 settings = Settings()
 ```
+
+## Usage
+
+### Register a New User
+
+1. Open your browser and navigate to `http://localhost:8000/register`.
+2. Fill in the registration form and submit.
+
+### Login
+
+1. Open your browser and navigate to `http://localhost:8000/login`.
+2. Fill in the login form and submit.
+3. The access token will be stored in the browser's local storage.
+
+### Upload an Image for Detection
+
+1. Open your browser and navigate to `http://localhost:8000`.
+2. Upload an image and click the "Detect" button.
+3. The original and processed images will be displayed.
+
+### View Detection History
+
+1. Open your browser and navigate to `http://localhost:8000/history`.
+2. The detection history will be displayed.
+
+## API Endpoints
+
+### Register
+
+- **URL:** `/register`
+- **Method:** `POST`
+- **Request Body:**
+  ```json
+  {
+    "username": "string",
+    "password": "string",
+    "email": "string"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "message": "User registered successfully"
+  }
+  ```
+
+### Login
+
+- **URL:** `/token`
+- **Method:** `POST`
+- **Request Body:**
+  ```json
+  {
+    "username": "string",
+    "password": "string"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "access_token": "string",
+    "token_type": "bearer"
+  }
+  ```
+
+### Detect
+
+- **URL:** `/detect`
+- **Method:** `POST`
+- **Request Body:**
+  - `file`: Image file
+- **Response:**
+  ```json
+  {
+    "task_id": "string",
+    "original_image_url": "string",
+    "output_image_url": "string",
+    "status": "string"
+  }
+  ```
+
+### Get Predictions
+
+- **URL:** `/predictions`
+- **Method:** `GET`
+- **Response:**
+  ```json
+  [
+    {
+      "result_id": "int",
+      "task_id": "string",
+      "original_image_path": "string",
+      "processed_image_path": "string",
+      "status": "string",
+      "predicted_at": "datetime",
+      "user_id": "int"
+    }
+  ]
+  ```
+
+## Directory Structure
