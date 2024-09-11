@@ -17,7 +17,50 @@ This project is a FastAPI-based web application for vehicle detection in images.
 - Docker Compose
 
 ## Installation
+### Build and start with pip
 
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/yourusername/Vehicle_Detection_WebAPI.git
+    cd Vehicle_Detection_WebAPI
+    ```
+
+2. Create and activate a virtual environment:
+
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
+
+3. Install the required packages:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. Start Redis:
+
+    ```bash
+    # On Linux or macOS
+    redis-server
+
+    # On Windows, you can use the following command if you have installed Redis using Chocolatey
+    redis-server --service-start
+    ```
+
+5. Start the Celery worker:
+
+    ```bash
+    celery -A celery_tasks.tasks worker --pool=threads -l info
+    ```
+
+6. Start the FastAPI application:
+
+    ```bash
+    uvicorn app.main:app --host 0.0.0.0 --port 8000
+    ```
+### Build and start with Docker
 1. Clone the repository:
 
     ```bash
