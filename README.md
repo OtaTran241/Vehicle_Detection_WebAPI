@@ -4,17 +4,16 @@ This project is a FastAPI-based web application for vehicle detection in images.
 
 ## Table of Contents
 
-✅ [Requirements](#Requirements)  
+✅ [Overview](#Overview)  
 ✅ [Installation](#Installation)  
 ✅ [Configuration](#Configuration)  
 ✅ [Usage](#Usage)  
 ✅ [API Endpoints](#API-Endpoints)  
 ✅ [Contributing](#Contributing)  
 
-## Requirements
+## Overview
 
-- Docker
-- Docker Compose
+<img src="./Images/Index.png" style="width:400px;"/>
 
 ## Installation
 ### Build and start with pip
