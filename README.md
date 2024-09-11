@@ -13,7 +13,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 
 ## Overview
 
-<img src="./Images/Index.png" style="width:400px;"/>
+<img src="./Images/Index.png" style="width:800px;"/>
 
 ## Installation
 ### Build and start with pip
