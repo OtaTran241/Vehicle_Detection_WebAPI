@@ -81,7 +81,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/Vehicle_Detection_WebAPI.git
+    git clone https://github.com/OtaTran241/Vehicle_Detection_WebAPI.git
     cd Vehicle_Detection_WebAPI
     ```
 
