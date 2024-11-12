@@ -16,7 +16,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 ## building model 
 
 - This model using the Faster R-CNN architecture with a custom ResNet backbone. The model is trained to detect and classify vehicles in images.
-- You can refer to how to build this model [here](https://github.com/OtaTran241/VehiclesDetection_FasterRCNN)
+- You can refer to how i built this model [here](https://github.com/OtaTran241/VehiclesDetection_FasterRCNN)
 
 ## Overview
 
