@@ -70,7 +70,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
   "task_id": "string",              // Unique task identifier
   "original_image": "string",       // Base64 encoded original image
   "output_image": "string",         // Base64 encoded output image with detections
-  "predictions": "array",           // List of predictions detected in the image
+  "predictions": "string",           // List of predictions detected in the image
   "status": "string"                // Status of the task (e.g., 'SUCCESS', 'FAILURE')
   }
   ```
