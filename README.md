@@ -185,10 +185,11 @@ settings = Settings()
 - **Response:**
   ```json
   {
-    "task_id": "string",
-    "original_image_url": "string",
-    "output_image_url": "string",
-    "status": "string"
+  "task_id": "string",              // Unique task identifier
+  "original_image": "string",       // Base64 encoded original image
+  "output_image": "string",         // Base64 encoded output image with detections
+  "predictions": "array",           // List of predictions detected in the image
+  "status": "string"                // Status of the task (e.g., 'SUCCESS', 'FAILURE')
   }
   ```
 
@@ -202,8 +203,9 @@ settings = Settings()
     {
       "result_id": "int",
       "task_id": "string",
-      "original_image_path": "string",
-      "processed_image_path": "string",
+      "original_image": "string",
+      "processed_image": "string",
+      "predictions": "string",
       "status": "string",
       "predicted_at": "datetime",
       "user_id": "int"
