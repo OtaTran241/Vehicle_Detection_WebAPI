@@ -215,7 +215,7 @@ settings = Settings()
 1. Open your browser and navigate to `http://localhost:8000/history`.
 2. The detection history will be displayed.
 
-## Using API **/detect** on the client side
+## Using API /detect on the client side
 ```python
 import requests
 import base64
