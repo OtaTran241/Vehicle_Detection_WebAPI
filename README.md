@@ -113,6 +113,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 - ```Jinja2```: Jinja2 is used to render HTML templates for the application's web pages, such as the login page, image upload page, and history page.  
 
 ## Installation
+- The web API uses an SQL-Server RDS database from the AWS cloud platform. You can create the database and update the necessary information in the `app/core/config.py` file for data storage. 
 ### Build and start with pip
 
 1. Clone the repository:
@@ -171,10 +172,6 @@ This project is a FastAPI-based web application for vehicle detection in images.
     ```
 
 3. The application will be available at `http://localhost:8000`.
-
-## Configuration
-
-- The web API uses an SQL-Server RDS database from the AWS cloud platform. You can create the database and update the necessary information in the `app/core/config.py` file for data storage.
 
 ### Example Configuration
 ```python
