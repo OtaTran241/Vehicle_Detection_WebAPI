@@ -11,7 +11,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 ✅ [Installation](#Installation)  
 ✅ [Database](#Database)  
 ✅ [Usage](#Usage)  
-✅ [Using API(/detect) on client](#Using-API-/detect-on-the-client-side)  
+✅ [Using API (/detect) on client](#using-api-detect-on-the-client-side)  
 ✅ [Contributing](#Contributing)  
 
 ## building model 
