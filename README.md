@@ -101,8 +101,8 @@ This project is a FastAPI-based web application for vehicle detection in images.
 <img src="./Images/Index.png" style="width:1800px;"/>
 
 ## Technologies Used
-```FastAPI```: FastAPI is the main framework used to build the application's API. It provides endpoints for user registration, login, image upload, and vehicle detection result retrieval.  
-```SQLAlchemy```: SQLAlchemy is used to interact with the database. It manages data models such as User and DetectionResult, and provides sessions for database operations.  
+- ```FastAPI```: FastAPI is the main framework used to build the application's API. It provides endpoints for user registration, login, image upload, and vehicle detection result retrieval.  
+- ```SQLAlchemy```: SQLAlchemy is used to interact with the database. It manages data models such as User and DetectionResult, and provides sessions for database operations.  
 ```Pydantic```: Pydantic is used for data validation and management of input and output data for the API. It ensures that the data sent to and received from the API adheres to defined structures.  
 ```Celery```: Celery is used for asynchronous task processing, such as vehicle detection in images. This helps offload work from the main server and improves the application's performance.  
 ```Redis```: Redis is used as a task queue for Celery. It stores tasks that need to be processed and manages their states.  
