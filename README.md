@@ -6,17 +6,94 @@ This project is a FastAPI-based web application for vehicle detection in images.
 
 ✅ [Overview](#Overview)  
 ✅ [building model](#building-model)  
+✅ [API Endpoints](#API-Endpoints)  
 ✅ [Technologies Used](#Technologies-Used)  
 ✅ [Installation](#Installation)  
 ✅ [Database](#Database)  
 ✅ [Usage](#Usage)  
-✅ [API Endpoints](#API-Endpoints)  
 ✅ [Contributing](#Contributing)  
 
 ## building model 
 
 - This model using the Faster R-CNN architecture with a custom ResNet backbone. The model is trained to detect and classify vehicles in images.
-- You can refer to how i built this model [here](https://github.com/OtaTran241/VehiclesDetection_FasterRCNN)
+- You can refer to how i built this model [here](https://github.com/OtaTran241/VehiclesDetection_FasterRCNN).
+
+## API Endpoints
+
+### Register
+
+- **URL:** `/register`
+- **Method:** `POST`
+- **Request Body:**
+  ```json
+  {
+    "username": "string",
+    "password": "string",
+    "email": "string"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "message": "User registered successfully"
+  }
+  ```
+
+### Login
+
+- **URL:** `/token`
+- **Method:** `POST`
+- **Request Body:**
+  ```json
+  {
+    "username": "string",
+    "password": "string"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "access_token": "string",
+    "token_type": "bearer"
+  }
+  ```
+
+### Detect
+
+- **URL:** `/detect`
+- **Method:** `POST`
+- **Request Body:**
+  - `file`: Image file
+- **Response:**
+  ```json
+  {
+  "task_id": "string",              // Unique task identifier
+  "original_image": "string",       // Base64 encoded original image
+  "output_image": "string",         // Base64 encoded output image with detections
+  "predictions": "array",           // List of predictions detected in the image
+  "status": "string"                // Status of the task (e.g., 'SUCCESS', 'FAILURE')
+  }
+  ```
+
+### Get Predictions
+
+- **URL:** `/predictions`
+- **Method:** `GET`
+- **Response:**
+  ```json
+  [
+    {
+      "result_id": "int",
+      "task_id": "string",
+      "original_image": "string",
+      "processed_image": "string",
+      "predictions": "string",
+      "status": "string",
+      "predicted_at": "datetime",
+      "user_id": "int"
+    }
+  ]
+  ```
 
 ## Overview
 
@@ -32,6 +109,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 ```Pillow```: Pillow is an image processing library used to open, process, and save images during the vehicle detection process.  
 ```PyTorch```: PyTorch is used to load and run the vehicle detection model (Faster R-CNN). It provides the necessary tools for tensor computations and model inference.  
 ```Jinja2```: Jinja2 is used to render HTML templates for the application's web pages, such as the login page, image upload page, and history page.  
+```AWS```: AWS RDS is used as the database to store account information and detection results.  
 
 ## Installation
 ### Build and start with pip
@@ -135,83 +213,6 @@ settings = Settings()
 
 1. Open your browser and navigate to `http://localhost:8000/history`.
 2. The detection history will be displayed.
-
-## API Endpoints
-
-### Register
-
-- **URL:** `/register`
-- **Method:** `POST`
-- **Request Body:**
-  ```json
-  {
-    "username": "string",
-    "password": "string",
-    "email": "string"
-  }
-  ```
-- **Response:**
-  ```json
-  {
-    "message": "User registered successfully"
-  }
-  ```
-
-### Login
-
-- **URL:** `/token`
-- **Method:** `POST`
-- **Request Body:**
-  ```json
-  {
-    "username": "string",
-    "password": "string"
-  }
-  ```
-- **Response:**
-  ```json
-  {
-    "access_token": "string",
-    "token_type": "bearer"
-  }
-  ```
-
-### Detect
-
-- **URL:** `/detect`
-- **Method:** `POST`
-- **Request Body:**
-  - `file`: Image file
-- **Response:**
-  ```json
-  {
-  "task_id": "string",              // Unique task identifier
-  "original_image": "string",       // Base64 encoded original image
-  "output_image": "string",         // Base64 encoded output image with detections
-  "predictions": "array",           // List of predictions detected in the image
-  "status": "string"                // Status of the task (e.g., 'SUCCESS', 'FAILURE')
-  }
-  ```
-
-### Get Predictions
-
-- **URL:** `/predictions`
-- **Method:** `GET`
-- **Response:**
-  ```json
-  [
-    {
-      "result_id": "int",
-      "task_id": "string",
-      "original_image": "string",
-      "processed_image": "string",
-      "predictions": "string",
-      "status": "string",
-      "predicted_at": "datetime",
-      "user_id": "int"
-    }
-  ]
-  ```
 
 ## Contributing
 Contributions are welcome! If you have any ideas for improving the model or adding new features, feel free to submit a pull request or send an email to [tranducthuan220401@gmail.com](mailto:tranducthuan220401@gmail.com).
