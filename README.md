@@ -1,6 +1,6 @@
 # Vehicle Detection Web API
 
-This project is a FastAPI-based web application for vehicle detection in images. It uses a pre-trained Faster R-CNN model to detect various types of vehicles and provides a web interface for uploading images and viewing detection results.
+This project is a FastAPI-based web application for vehicle detection in images. It uses a custom Faster R-CNN model to detect various types of vehicles and provides a web interface for uploading images and viewing detection results.
 
 ## Table of Contents
 
