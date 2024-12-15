@@ -106,11 +106,11 @@ This project is a FastAPI-based web application for vehicle detection in images.
 ```Pydantic```: Pydantic is used for data validation and management of input and output data for the API. It ensures that the data sent to and received from the API adheres to defined structures.  
 ```Celery```: Celery is used for asynchronous task processing, such as vehicle detection in images. This helps offload work from the main server and improves the application's performance.  
 ```Redis```: Redis is used as a task queue for Celery. It stores tasks that need to be processed and manages their states.  
+```AWS```: AWS RDS is used as the database to store account information and detection results.  
 ```Uvicorn```:Uvicorn is an ASGI server used to run the FastAPI application. It provides a high-performance environment for handling HTTP requests.  
 ```Pillow```: Pillow is an image processing library used to open, process, and save images during the vehicle detection process.  
 ```PyTorch```: PyTorch is used to load and run the vehicle detection model (Faster R-CNN). It provides the necessary tools for tensor computations and model inference.  
 ```Jinja2```: Jinja2 is used to render HTML templates for the application's web pages, such as the login page, image upload page, and history page.  
-```AWS```: AWS RDS is used as the database to store account information and detection results.  
 
 ## Installation
 ### Build and start with pip
