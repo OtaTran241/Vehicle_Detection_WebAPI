@@ -8,6 +8,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 ✅ [building model](#building-model)  
 ✅ [API Endpoints](#API-Endpoints)  
 ✅ [Technologies Used](#Technologies-Used)  
+✅ [Configuration](#Configuration)  
 ✅ [Installation](#Installation)  
 ✅ [Database](#Database)  
 ✅ [Usage](#Usage)  
@@ -110,12 +111,28 @@ This project is a FastAPI-based web application for vehicle detection in images.
 - ```Uvicorn```:Uvicorn is an ASGI server used to run the FastAPI application. It provides a high-performance environment for handling HTTP requests.  
 - ```Pillow```: Pillow is an image processing library used to open, process, and save images during the vehicle detection process.  
 - ```PyTorch```: PyTorch is used to load and run the vehicle detection model (Faster R-CNN). It provides the necessary tools for tensor computations and model inference.  
-- ```Jinja2```: Jinja2 is used to render HTML templates for the application's web pages, such as the login page, image upload page, and history page.  
+- ```Jinja2```: Jinja2 is used to render HTML templates for the application's web pages, such as the login page, image upload page, and history page.
+
+## Configuration
+- The web API uses an SQL-Server RDS database from the AWS cloud platform. You can create the database and update the necessary information in the `app/core/config.py` file for data storage.  
+Example `config.py`
+```python
+class Settings:
+    SERVER: str = 'test-db.c1aekiaskevm.ap-southeast-1.rds.amazonaws.com'
+    USERNAME: str = 'testadmin'
+    PASSWORD: str = 'testpw'
+    DATABASE_NAME: str = 'testdb'
+    DATABASE_URL: str = f"mssql+pymssql://{USERNAME}:{PASSWORD}@{SERVER}/{DATABASE_NAME}"
+    SECRET_KEY: str = "your_secret_key"
+    TEMP_DIR: str = "/app/temp"
+    CELERY_BROKER_URL: str = "redis://redis:6379/0"
+    CELERY_RESULT_BACKEND: str = "redis://redis:6379/0"
+settings = Settings()
+```
 
 ## Installation
-- The web API uses an SQL-Server RDS database from the AWS cloud platform. You can create the database and update the necessary information in the `app/core/config.py` file for data storage. 
-### Build and start with pip
 
+### Build and start with pip
 1. Clone the repository:
 
     ```bash
@@ -172,21 +189,6 @@ This project is a FastAPI-based web application for vehicle detection in images.
     ```
 
 3. The application will be available at `http://localhost:8000`.
-
-### Example Configuration
-```python
-class Settings:
-    SERVER: str = 'test-db.c1aekiaskevm.ap-southeast-1.rds.amazonaws.com'
-    USERNAME: str = 'testadmin'
-    PASSWORD: str = 'testpw'
-    DATABASE_NAME: str = 'testdb'
-    DATABASE_URL: str = f"mssql+pymssql://{USERNAME}:{PASSWORD}@{SERVER}/{DATABASE_NAME}"
-    SECRET_KEY: str = "your_secret_key"
-    TEMP_DIR: str = "/app/temp"
-    CELERY_BROKER_URL: str = "redis://redis:6379/0"
-    CELERY_RESULT_BACKEND: str = "redis://redis:6379/0"
-settings = Settings()
-```
 
 ## Usage
 
