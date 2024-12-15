@@ -79,7 +79,7 @@ def predict_image(model, image):
     unique_filename = f"annotated_{uuid.uuid4()}.jpg"
     output_path = os.path.join(settings.TEMP_DIR, unique_filename)
     annotated_image.save(output_path)
-    return output_path
+    return output_path, predictions
 
 def run_detection(file_path):
     """
@@ -89,21 +89,26 @@ def run_detection(file_path):
     file_path (str): The path to the input image file.
 
     Returns:
-    dict: A dictionary containing the output image path and a success message.
+    dict: A dictionary containing the output image path, predictions, and a success message.
     """
     image = Image.open(file_path).convert("RGB")
     model = load_model()
-    output_image_path = predict_image(model, image)
+    output_image_path, predictions = predict_image(model, image)
     
-    original_image_url = f"/temp/{os.path.basename(file_path)}"
-    output_image_url = f"/temp/{os.path.basename(output_image_path)}"
+    json_serializable_predictions = []
+    for prediction in predictions:
+        json_serializable_predictions.append({
+            'boxes': prediction['boxes'].tolist(),  
+            'labels': prediction['labels'].tolist(), 
+            'scores': prediction['scores'].tolist()   
+        })
     
-    # Debug prints
-    print(f"Original Image Path: {original_image_url}")
-    print(f"Processed Image Path: {output_image_url}")
+    original_image_url = f"{os.path.basename(file_path)}"
+    output_image_url = f"{os.path.basename(output_image_path)}"
     
     return {
         "original_image_url": original_image_url,
         "output_image_url": output_image_url,
+        "predictions": json_serializable_predictions,
         "message": "Detection complete!"
     }

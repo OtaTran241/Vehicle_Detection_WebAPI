@@ -5,6 +5,7 @@ from app.core.config import settings
 from app.db import SessionLocal, DetectionResult
 from sqlalchemy.orm import Session
 from datetime import datetime
+import json
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -36,7 +37,7 @@ def detect_object(self, file_path, user_id):
         user_id (int): The ID of the user who initiated the task.
 
     Returns:
-        dict: A dictionary containing the output image path and a success message.
+        dict: A dictionary containing the output image path, predictions, and a success message.
     """
     db: Session = next(get_db())
     try:
@@ -45,9 +46,8 @@ def detect_object(self, file_path, user_id):
         result['task_id'] = self.request.id
         logger.info(f"Detection completed: {result}")
 
-        # Debug prints
-        print(f"Original Image Path: {result['original_image_url']}")
-        print(f"Processed Image Path: {result['output_image_url']}")
+        # Convert predictions to JSON string
+        predictions_json = json.dumps(result['predictions'])
 
         detection_result = DetectionResult(
             task_id=self.request.id,
@@ -55,7 +55,8 @@ def detect_object(self, file_path, user_id):
             processed_image_path=result['output_image_url'],
             status='SUCCESS',
             predicted_at=datetime.utcnow(),
-            user_id=user_id
+            user_id=user_id,
+            predictions=predictions_json 
         )
         db.add(detection_result)
         db.commit()

@@ -10,10 +10,11 @@ from app.db import SessionLocal, User, DetectionResult
 from app.schemas import UserCreate, UserLogin, Token
 from app.core.security import verify_password, get_password_hash, create_access_token, get_current_user
 from datetime import datetime
+import base64
 import os
 from sqlalchemy.orm import Session
+from app.core.config import settings
 import asyncio
-
 router = APIRouter()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -55,6 +56,21 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
     access_token = create_access_token(data={"sub": db_user.username})
     return {"access_token": access_token, "token_type": "bearer"}
 
+def encode_image_to_base64(image_path):
+    """
+    Encode an image file to a base64 string.
+
+    Args:
+        image_path (str): Path to the image file.
+
+    Returns:
+        str: Base64 encoded string of the image.
+    """
+    image_file_path = os.path.join(settings.TEMP_DIR, image_path)
+
+    with open(image_file_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode("utf-8")
+
 @router.post("/detect")
 async def detect(file: UploadFile = File(...), background_tasks: BackgroundTasks = None, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     """
@@ -67,7 +83,7 @@ async def detect(file: UploadFile = File(...), background_tasks: BackgroundTasks
         db (Session): SQLAlchemy session.
 
     Returns:
-        dict: Task ID and image URLs.
+        dict: Task ID, original image, output image, predictions.
     """
     current_user = get_current_user(token, db)
     file_location = save_upload_file(file)
@@ -79,10 +95,15 @@ async def detect(file: UploadFile = File(...), background_tasks: BackgroundTasks
     
     if task_result.state == 'SUCCESS':
         result = task_result.result
+
+        original_image_base64 = encode_image_to_base64(result['original_image_url'])
+        output_image_base64 = encode_image_to_base64(result['output_image_url'])
+
         return {
             "task_id": task.id,
-            "original_image_url": result['original_image_url'],
-            "output_image_url": result['output_image_url'],
+            "original_image": original_image_base64,
+            "output_image": output_image_base64,
+            "predictions": result['predictions'],
             "status": task_result.state
         }
     elif task_result.state == 'FAILURE':

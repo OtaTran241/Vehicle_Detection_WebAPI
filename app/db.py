@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from app.core.config import settings
@@ -41,6 +41,7 @@ class DetectionResult(Base):
         status (str): Status of the detection.
         predicted_at (datetime): Prediction date.
         user_id (int): Foreign key to User.
+        predictions (str): JSON string of predictions.
         user (relationship): Relationship to User.
     """
     __tablename__ = "results"
@@ -52,6 +53,11 @@ class DetectionResult(Base):
     status = Column(String)
     predicted_at = Column(DateTime)
     user_id = Column(Integer, ForeignKey('users.user_id'))
+    predictions = Column(Text)
     user = relationship("User", back_populates="results")
 
-
+def init_db():
+    """
+    Initialize the database by creating all tables.
+    """
+    Base.metadata.create_all(bind=engine)

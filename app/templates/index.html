@@ -96,8 +96,8 @@
             });
             const result = await response.json();
             if (response.ok) {
-                document.getElementById('original-image').src = result.original_image_url;
-                document.getElementById('processed-image').src = result.output_image_url;
+                document.getElementById('original-image').src = `data:image/jpeg;base64,${result.original_image}`;
+                document.getElementById('processed-image').src = `data:image/jpeg;base64,${result.output_image}`;
                 document.getElementById('images').style.display = 'flex';
             } else {
                 alert('Error: ' + result.error);

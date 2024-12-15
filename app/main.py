@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from app.api.routes import router as api_router
 from app.core.config import settings
+from app import init_db
 from sqlalchemy import create_engine, text
 import os
 
@@ -81,7 +82,7 @@ async def register(request: Request):
 @app.on_event("startup")
 async def startup_event():
     """
-    Check SQL Server connection on startup.
+    Check SQL Server connection on startup and initialize database.
 
     Raises:
         Exception: If connection fails.
@@ -91,5 +92,8 @@ async def startup_event():
         with engine.connect() as connection:
             connection.execute(text("SELECT 1"))
         print("SQLAlchemy connection successful!")
+
+        init_db()
+        print("Database tables initialized successfully!")
     except Exception as e:
         print(f"SQLAlchemy connection failed: {e}")
