@@ -11,6 +11,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 ✅ [Installation](#Installation)  
 ✅ [Database](#Database)  
 ✅ [Usage](#Usage)  
+✅ [Using API(/detect) on client](#Using-API-/detect-on-the-client-side)  
 ✅ [Contributing](#Contributing)  
 
 ## building model 
@@ -213,6 +214,41 @@ settings = Settings()
 
 1. Open your browser and navigate to `http://localhost:8000/history`.
 2. The detection history will be displayed.
+
+## Using API **/detect** on the client side
+```python
+import requests
+import base64
+
+# Step 1: Login to get the access token
+login_url = "http://localhost:8000/token"
+login_data = {
+    "username": "user123",
+    "password": "password123"
+}
+
+login_response = requests.post(login_url, data=login_data)
+access_token = login_response.json().get('access_token')
+
+# Step 2: Upload the image for detection
+detect_url = "http://localhost:8000/detect"
+headers = {
+    "Authorization": f"Bearer {access_token}"
+}
+
+with open("path_to_your_image.jpg", "rb") as image_file:
+    files = {"file": image_file}
+    detect_response = requests.post(detect_url, headers=headers, files=files)
+
+# Step 3: Handle the response
+if detect_response.status_code == 200:
+    result = detect_response.json()
+    print("Task ID:", result['task_id'])
+    print("Predictions:", result['predictions'])
+    # You can also save or display the images
+else:
+    print("Error:", detect_response.json())
+```
 
 ## Contributing
 Contributions are welcome! If you have any ideas for improving the model or adding new features, feel free to submit a pull request or send an email to [tranducthuan220401@gmail.com](mailto:tranducthuan220401@gmail.com).
