@@ -2,9 +2,10 @@
 
 This project is a FastAPI-based web application for vehicle detection in images. It uses a custom Faster R-CNN model to detect various types of vehicles and provides a web interface for uploading images and viewing detection results. Additionally, the project exposes a RESTful API that allows users to interact with the detection functionality programmatically, enabling image uploads and retrieval of detection results via HTTP requests.
 
+<img src="./Images/Index.png" style="width:1800px;"/>
+
 ## Table of Contents
 
-✅ [Overview](#Overview)  
 ✅ [building model](#building-model)  
 ✅ [API Endpoints](#API-Endpoints)  
 ✅ [Technologies Used](#Technologies-Used)  
@@ -96,10 +97,6 @@ This project is a FastAPI-based web application for vehicle detection in images.
     }
   ]
   ```
-
-## Overview
-
-<img src="./Images/Index.png" style="width:1800px;"/>
 
 ## Technologies Used
 - ```FastAPI```: FastAPI is the main framework used to build the application's API. It provides endpoints for user registration, login, image upload, and vehicle detection result retrieval.  
