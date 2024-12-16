@@ -65,6 +65,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 - **Method:** `POST`
 - **Request Body:**
   - `file`: Image file
+  - `Authorization`: Access token
 - **Response:**
   ```json
   {
