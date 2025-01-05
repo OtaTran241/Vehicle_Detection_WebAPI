@@ -37,7 +37,7 @@ This project is a FastAPI-based web application for vehicle detection in images.
 - **Response:**
   ```json
   {
-    "message": "User registered successfully"
+    "message": "string"
   }
   ```
 
